@@ -19,4 +19,7 @@ import java.util.List;
 public class Categorias extends Base{
     private String denominacion;
 
+    public String getDenominacionString() {
+        return denominacion;
+    }
 }

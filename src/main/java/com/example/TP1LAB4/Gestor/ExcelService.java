@@ -37,7 +37,7 @@ public class ExcelService {
             row.createCell(5).setCellValue(instrumento.getCostoEnvio());
             row.createCell(6).setCellValue(instrumento.getCantidadVendida());
             row.createCell(7).setCellValue(instrumento.getDescripcion());
-            row.createCell(8).setCellValue(instrumento.getCategoria().toString());
+            row.createCell(8).setCellValue(instrumento.getCategoria().getDenominacionString());
         }
 
         // Escribir el archivo en el OutputStream

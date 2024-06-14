@@ -1,6 +1,11 @@
 package com.example.TP1LAB4.Gestor;
 
 import com.example.TP1LAB4.Entities.Instrumento;
+import com.itextpdf.io.image.ImageData;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.layout.element.Image;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.UnitValue;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayOutputStream;
@@ -26,7 +31,6 @@ public class PdfService {
         Document document = new Document(pdfDoc);
 
         PdfFont font = PdfFontFactory.createFont(StandardFonts.HELVETICA);
-
 
         document.add(new Paragraph("Instrumento: " + instrumento.getInstrumento()).setFont(font));
         document.add(new Paragraph("Marca: " + instrumento.getMarca()).setFont(font));
