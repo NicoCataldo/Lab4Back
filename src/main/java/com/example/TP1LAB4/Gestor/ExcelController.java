@@ -1,7 +1,7 @@
 package com.example.TP1LAB4.Gestor;
 
-import com.example.TP1LAB4.Entities.Instrumento;
-import com.example.TP1LAB4.Services.InstrumentoService;
+import com.example.TP1LAB4.Entities.Pedido;
+import com.example.TP1LAB4.Services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -13,29 +13,34 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/Excel")
+@RequestMapping("/api/v1/excel")
 public class ExcelController {
 
     @Autowired
     private ExcelService excelService;
 
     @Autowired
-    private InstrumentoService instrumentoService; // Servicio para obtener los instrumentos
+    private PedidoService pedidoService; // Debes tener un servicio para manejar los pedidos
 
-    @GetMapping("")
-    public ResponseEntity<InputStreamResource> downloadExcel() throws Exception {
-        List<Instrumento> instrumentos = instrumentoService.findAll(); // Obtener lista de instrumentos desde el servicio
+    @GetMapping("/pedidos")
+    public ResponseEntity<InputStreamResource> downloadPedidosExcel() throws Exception {
+        // Obtener lista de pedidos desde el servicio
+        LocalDate fechaDesde = LocalDate.of(2024, 1, 1); // Ejemplo: Fecha desde
+        LocalDate fechaHasta = LocalDate.of(2024, 12, 31); // Ejemplo: Fecha hasta
+        List<Pedido> pedidos = pedidoService.findByFechaBetween(fechaDesde, fechaHasta);
 
+        // Generar el archivo Excel
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-        excelService.exportToExcel(instrumentos, out);
+        excelService.exportPedidosToExcel(pedidos, out);
 
+        // Preparar para la descarga
         ByteArrayInputStream in = new ByteArrayInputStream(out.toByteArray());
         HttpHeaders headers = new HttpHeaders();
-        headers.add("Content-Disposition", "attachment; filename=instrumentos.xlsx");
+        headers.add("Content-Disposition", "attachment; filename=pedidos_" + fechaDesde + "_to_" + fechaHasta + ".xlsx");
 
         return ResponseEntity.ok()
                 .headers(headers)
@@ -43,4 +48,5 @@ public class ExcelController {
                 .body(new InputStreamResource(in));
     }
 }
+
 

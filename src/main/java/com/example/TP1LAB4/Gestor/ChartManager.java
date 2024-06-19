@@ -13,8 +13,7 @@ public class ChartManager {
     String clave = "123456789";
 
 
-    public ResultSet getDatosChart(){
-
+    public ResultSet getDatosChartByMonthAndYear() {
         ResultSet rs = null;
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -22,16 +21,45 @@ public class ChartManager {
 
             Statement s = conexion.createStatement();
 
-            // Se realiza la consulta. Los resultados se guardan en el
-            // ResultSet rs
-            rs = s.executeQuery("SELECT instrumento, SUM(cantidad_vendida) AS cantidad_vendida, SUM(costo * 0.8) montoCompra, SUM(costo) montoVenta " +
-                    "FROM instrumento GROUP BY instrumento HAVING cantidad_vendida > 1 ORDER BY instrumento");
+            // Consulta para agrupar pedidos por mes y año
+            rs = s.executeQuery(
+                    "SELECT DATE_FORMAT(fecha, '%Y-%m') AS mes_anio, COUNT(*) AS cantidad_pedidos " +
+                            "FROM Pedido " +
+                            "GROUP BY mes_anio " +
+                            "ORDER BY mes_anio"
+            );
 
         } catch (Exception e) {
             e.printStackTrace();
         }
         return rs;
-
-
     }
+
+    public ResultSet getDatosChartByInstrumento() {
+        ResultSet rs = null;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(urlConexion, usuario, clave);
+
+            Statement s = conexion.createStatement();
+
+            // Consulta para agrupar pedidos por instrumento
+            rs = s.executeQuery(
+                    "SELECT i.instrumento, COUNT(*) AS cantidad_pedidos " +
+                            "FROM Pedido p " +
+                            "JOIN detalle_pedido d ON p.Detalle_id = d.id " +
+                            "JOIN Instrumento i ON d.Id = i.id " +
+                            "GROUP BY i.instrumento " +
+                            "ORDER BY cantidad_pedidos DESC"
+            );
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+
+
+
 }

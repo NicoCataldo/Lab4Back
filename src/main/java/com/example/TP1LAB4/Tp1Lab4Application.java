@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @SpringBootApplication
@@ -61,7 +62,7 @@ public class Tp1Lab4Application {
 					.instrumento("Mandolina Instrumento Musical Stagg Sunburst")
 					.marca("Stagg")
 					.modelo("M20")
-					.imagen("nro10.jpg")
+					.imagen("https://http2.mlstatic.com/D_843554-MLU73703142465_122023-C.jpg")
 					.precio(2450f)
 					.costo(100f)
 					.costoEnvio("G")
@@ -75,7 +76,7 @@ public class Tp1Lab4Application {
 					.instrumento("Pandereta Pandero Instrumento Musical ")
 					.marca("DyM ventas")
 					.modelo("32 sonajas")
-					.imagen("nro9.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_895881-MLA69104523759_042023-O.webp")
 					.precio(325f)
 					.costo(200f)
 					.costoEnvio("150")
@@ -89,7 +90,7 @@ public class Tp1Lab4Application {
 					.instrumento("Triangulo Musical 24 Cm Percusion")
 					.marca("LBP")
 					.modelo("24")
-					.imagen("nro8.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_793682-MLA45982223244_052021-O.webp")
 					.precio(260f)
 					.costo(100f)
 					.costoEnvio("250")
@@ -103,7 +104,7 @@ public class Tp1Lab4Application {
 					.instrumento("Bar Chimes Lp Cortina Musical 72 Barras")
 					.marca("FM")
 					.modelo("LATIN")
-					.imagen("nro7.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_838108-MLA31575605575_072019-O.webp")
 					.precio(2250f)
 					.costo(1000f)
 					.costoEnvio("G")
@@ -117,7 +118,7 @@ public class Tp1Lab4Application {
 					.instrumento("Shekeres. Instrumento. Música. Artesanía.")
 					.marca("Azalea Artesanías")
 					.modelo("Cuentas de madera")
-					.imagen("nro6.jpg")
+					.imagen("https://galeriaartesanalpr.com/cdn/shop/files/SHEKERE800LOGO1_b57b606d-b046-49c2-83cf-1819de952cec_600x.jpg?v=1693183399")
 					.precio(850f)
 					.costo(500f)
 					.costoEnvio("300")
@@ -131,7 +132,7 @@ public class Tp1Lab4Application {
 					.instrumento("Antiguo Piano Aleman Con Candelabros.")
 					.marca("Neumeyer")
 					.modelo("Stratus")
-					.imagen("nro3.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_741625-MLA25468412771_032017-O.webp")
 					.precio(17000f)
 					.costo(10000f)
 					.costoEnvio("2000")
@@ -146,7 +147,7 @@ public class Tp1Lab4Application {
 					.instrumento("Guitarra Ukelele Infantil Grande 60cm")
 					.marca("GUITARRA")
 					.modelo("UKELELE")
-					.imagen("nro4.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_602949-MLA32297056646_092019-O.webp")
 					.precio(500f)
 					.costo(100f)
 					.costoEnvio("G")
@@ -160,7 +161,7 @@ public class Tp1Lab4Application {
 					.instrumento("Teclado Organo Electronico Musical Instrumento 54 Teclas")
 					.marca("GADNIC")
 					.modelo("T01")
-					.imagen("nro2.jpg")
+					.imagen("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSUuXmqWnIka9SoIOmPpSPTWC4u07HY4FkCKw&s")
 					.precio(2250f)
 					.costo(1200f)
 					.costoEnvio("G")
@@ -174,7 +175,7 @@ public class Tp1Lab4Application {
 					.instrumento("Instrumentos De Percusión Niños Set Musical Con Estuche")
 					.marca("KNIGHT")
 					.modelo("LB17")
-					.imagen("nro1.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_773874-MLA52856983256_122022-O.webp")
 					.precio(2700f)
 					.costo(1500f)
 					.costoEnvio("300")
@@ -188,7 +189,7 @@ public class Tp1Lab4Application {
 					.instrumento("Batería Musical Infantil Juguete Niño 9 Piezas Palillos")
 					.marca("Bateria")
 					.modelo("Infantil")
-					.imagen("nro5.jpg")
+					.imagen("https://http2.mlstatic.com/D_NQ_NP_643960-MLA27368744727_052018-O.webp")
 					.precio(850)
 					.costo(500f)
 					.costoEnvio("250")
@@ -212,8 +213,106 @@ public class Tp1Lab4Application {
 					.build();
 			usuarioRepository.save(usuario2);
 
+			DetallePedido detalle1 = DetallePedido.builder()
+					.cantidad(2)
+					.instrumento(instrumento10)
+					.build();
+
+			Pedido pedido1 = Pedido.builder()
+					.totalPedido(2222)
+					.fecha(LocalDate.of(2024,4,23))
+					.detalle(detalle1)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido1);
+
+			DetallePedido detalle2 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento1)
+					.build();
+
+			Pedido pedido2 = Pedido.builder()
+					.totalPedido(instrumento1.getPrecio())
+					.fecha(LocalDate.of(2024,3,23))
+					.detalle(detalle2)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido2);
+
+			DetallePedido detalle3 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento4)
+					.build();
+
+			Pedido pedido3 = Pedido.builder()
+					.totalPedido(instrumento4.getPrecio())
+					.fecha(LocalDate.of(2024,2,1))
+					.detalle(detalle3)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido3);
+
+			DetallePedido detalle4 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento5)
+					.build();
+
+			Pedido pedido4 = Pedido.builder()
+					.totalPedido(instrumento5.getPrecio())
+					.fecha(LocalDate.of(2024,6,23))
+					.detalle(detalle4)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido4);
+
+			DetallePedido detalle5 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento7)
+					.build();
+
+			Pedido pedido5 = Pedido.builder()
+					.totalPedido(instrumento7.getPrecio())
+					.fecha(LocalDate.of(2024,6,5))
+					.detalle(detalle5)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido5);
+
+			DetallePedido detalle6 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento8)
+					.build();
+
+			Pedido pedido6 = Pedido.builder()
+					.totalPedido(instrumento6.getPrecio())
+					.fecha(LocalDate.of(2024,2,3))
+					.detalle(detalle6)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido6);
+
+			DetallePedido detalle7 = DetallePedido.builder()
+					.cantidad(1)
+					.instrumento(instrumento8)
+					.build();
+
+			Pedido pedido7 = Pedido.builder()
+					.totalPedido(instrumento6.getPrecio())
+					.fecha(LocalDate.of(2024,4,3))
+					.detalle(detalle7)
+					.activo(false)
+					.build();
+
+			pedidoRepository.save(pedido7);
+
 			*/
-			
+
 		};
 	}
 	

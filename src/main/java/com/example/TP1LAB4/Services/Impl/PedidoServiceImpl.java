@@ -8,6 +8,7 @@ import com.example.TP1LAB4.Services.PedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -29,5 +30,9 @@ public class PedidoServiceImpl extends BaseServiceImpl<Pedido, Long> implements 
         } catch (Exception e) {
             throw new Exception(e.getMessage());
         }
+    }
+
+    public List<Pedido> findByFechaBetween(LocalDate fechaDesde, LocalDate fechaHasta) {
+        return pedidoRepository.findByFechaBetween(fechaDesde, fechaHasta);
     }
 }

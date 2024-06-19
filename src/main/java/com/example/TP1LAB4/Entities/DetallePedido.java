@@ -24,8 +24,4 @@ public class DetallePedido extends Base{
     @ManyToOne(optional = false)
     @JoinColumn(name = "IdInstrumento")
     private Instrumento instrumento;
-
-
-
-
 }
