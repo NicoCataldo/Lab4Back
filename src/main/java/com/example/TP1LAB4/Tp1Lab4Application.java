@@ -297,19 +297,6 @@ public class Tp1Lab4Application {
 
 			pedidoRepository.save(pedido6);
 
-			DetallePedido detalle7 = DetallePedido.builder()
-					.cantidad(1)
-					.instrumento(instrumento8)
-					.build();
-
-			Pedido pedido7 = Pedido.builder()
-					.totalPedido(instrumento6.getPrecio())
-					.fecha(LocalDate.of(2024,4,3))
-					.detalle(detalle7)
-					.activo(false)
-					.build();
-
-			pedidoRepository.save(pedido7);
 
 			*/
 
